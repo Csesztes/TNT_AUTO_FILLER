@@ -1,0 +1,49 @@
+Option Explicit
+
+Public MyArray() As Variant
+Public lastrow As Long
+Public lastcolumn As Long
+Public i As Long
+
+Sub Clear()
+    Dim r As Long
+    For r = 21 To 36 Step 1
+            Sheet1.Range("A" & r).Value = ""
+            Sheet1.Range("C" & r).Value = ""
+            Sheet1.Range("H" & r).Value = ""
+            Sheet1.Range("L" & r).Value = ""
+    Next r
+End Sub
+
+Private Sub FillArray()
+    Let lastrow = Sheet3.UsedRange.Rows.Count
+    Let lastcolumn = Sheet3.UsedRange.Columns.Count
+    ReDim MyArray(2 To lastrow, 2 To lastcolumn) As Variant
+    MyArray = Sheet3.UsedRange
+End Sub
+Public Function FindMegnev(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           FindMegnev = Sheet3.Range("E" & i).Value
+        End If
+    Next i
+End Function
+
+Public Function Findtaric(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           Findtaric = Sheet3.Range("G" & i).Value
+        End If
+    Next i
+End Function
+
+Public Function FindVendor(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           FindVendor = Sheet3.Range("D" & i).Value
+        End If
+    Next i
+End Function
