@@ -1,0 +1,33 @@
+Option Explicit
+
+Sub Clear()
+    With Sheet1
+    Dim r As Long
+    For r = 21 To 36 Step 1
+                .Range("A" & r).Value = ""
+                .Range("C" & r).Value = ""
+                .Range("H" & r).Value = ""
+                .Range("L" & r).Value = ""
+    Next r
+        .Range("D13").Value = ""
+        .Range("E14").Value = ""
+        .Range("E15").Value = ""
+    End With
+End Sub
+
+Sub Testcls()
+    
+    Dim TestClass As clsMain
+    
+    Set TestClass = New clsMain
+    
+    TestClass.Tracking = InputBox("Input TNT Tracking.", "Tracking")
+    TestClass.InvoiceNumber = InputBox("Input InvoiceNumber.", "InvoiceNumber")
+    TestClass.Amount = InputBox("Input TNT Amount.", "Amount")
+    TestClass.curr = InputBox("Input Currency.", "Currency")
+    
+    Sheet1.Range("D13").Value = TestClass.Tracking
+    Sheet1.Range("E14").Value = TestClass.InvoiceNumber
+    Sheet1.Range("E15").Value = TestClass.Amount & "_" & TestClass.curr
+End Sub
+
