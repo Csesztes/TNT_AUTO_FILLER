@@ -1,0 +1,76 @@
+Option Explicit
+
+Private pTracking As String
+Private pInvoiceNumber As String
+Private pAmount As String
+Private pCurr As String
+Private MyArray() As Variant
+Private lastrow As Long
+Private lastcolumn As Long
+Private i As Long
+
+Public Property Let Tracking(Value As String)
+    pTracking = Value
+End Property
+
+Public Property Get Tracking() As String
+    Tracking = pTracking
+End Property
+
+Public Property Let InvoiceNumber(Value As String)
+    pInvoiceNumber = Value
+End Property
+
+Public Property Get InvoiceNumber() As String
+    InvoiceNumber = pInvoiceNumber
+End Property
+
+Public Property Let Amount(Value As String)
+    pAmount = Value
+End Property
+
+Public Property Get Amount() As String
+    Amount = pAmount
+End Property
+
+Public Property Let curr(Value As String)
+    pCurr = Value
+End Property
+
+Public Property Get curr() As String
+    curr = pCurr
+End Property
+
+
+Public Sub FillArray()
+    Let lastrow = Sheet3.UsedRange.Rows.Count
+    Let lastcolumn = Sheet3.UsedRange.Columns.Count
+    ReDim MyArray(2 To lastrow, 2 To lastcolumn) As Variant
+    MyArray = Sheet3.UsedRange
+End Sub
+Public Function FindMegnev(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           FindMegnev = Sheet3.Range("E" & i).Value
+        End If
+    Next i
+End Function
+
+Public Function Findtaric(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           Findtaric = Sheet3.Range("G" & i).Value
+        End If
+    Next i
+End Function
+
+Public Function FindVendor(myrange As Range) As String
+    Call FillArray
+    For i = 2 To UBound(MyArray, 1) Step 1
+        If myrange.Value = MyArray(i, 1) Then
+           FindVendor = Sheet3.Range("D" & i).Value
+        End If
+    Next i
+End Function
